@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Athra — Brand Guidelines</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Marcellus&family=Inter:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f1e8d4;
+    --paper-shade: #e8dec7;
+    --paper-deep: #d8cca9;
+    --ink: #1f1a14;
+    --rust: #8a3f2c;
+    --rust-deep: #6b2f20;
+    --ochre: #b8893a;
+    --stone: #8a7f68;
+    --line: rgba(31, 26, 20, 0.15);
+    --line-soft: rgba(31, 26, 20, 0.08);
+    --grid: rgba(138, 63, 44, 0.22);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* Subtle paper texture across the whole document */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 30%, rgba(139, 110, 70, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(139, 110, 70, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  /* ==================== STICKY NAV ==================== */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(241, 232, 212, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  .nav-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-mark svg { width: 20px; height: 20px; }
+  .nav-mark .name {
+    font-family: 'Marcellus', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+  }
+  .nav-links a {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-doc {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  main {
+    position: relative;
+    z-index: 2;
+  }
+
+  .document {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: transparent;
+    position: relative;
+  }
+
+  .page {
+    position: relative;
+    z-index: 2;
+    padding: 100px 80px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 70px;
+  }
+  .page:last-child { border-bottom: none; }
+
+  /* ==================== PAGE HEADER / FOOTER ==================== */
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-header-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-header-mark svg { width: 14px; height: 14px; }
+  .page-header-mark .name {
+    font-family: 'Marcellus', serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .page-header-meta {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+  .page-header-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 12px;
+    color: var(--stone);
+    letter-spacing: 0.15em;
+  }
+  .page-body { min-width: 0; }
+  .page-footer {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+
+  /* ==================== COVER (from manuscript) ==================== */
+  .cover {
+    padding: 120px 80px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    min-height: 90vh;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--stone);
+    letter-spacing: 0.1em;
+    text-align: left;
+  }
+  .cover-top-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-style: normal;
+    font-family: 'Marcellus', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--ink);
+  }
+  .cover-top-mark svg { width: 16px; height: 16px; }
+
+  .cover-middle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  .cover-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--rust);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border: 1px solid var(--rust);
+    border-radius: 100px;
+    margin-bottom: 64px;
+  }
+  .cover-stamp .dot {
+    width: 4px; height: 4px;
+    background: var(--rust);
+    border-radius: 50%;
+  }
+
+  .cover-big-mark {
+    margin-bottom: 44px;
+  }
+  .cover-big-mark svg {
+    width: 88px;
+    height: 88px;
+  }
+
+  .cover-name {
+    font-family: 'Marcellus', serif;
+    font-size: 124px;
+    letter-spacing: 0.04em;
+    line-height: 0.85;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .cover-arabic {
+    font-family: 'Amiri', serif;
+    font-weight: 400;
+    font-size: 56px;
+    color: var(--rust);
+    margin-bottom: 44px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .cover-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--ink);
+    margin: 0 auto 32px;
+  }
+
+  .cover-statement {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .cover-statement em { color: var(--rust); }
+
+  .cover-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+    text-align: left;
+  }
+  .cover-bottom-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cover-bottom-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .cover-bottom-value {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  /* ==================== TOC ==================== */
+  .toc-list { margin-top: 40px; }
+  .toc-item {
+    display: grid;
+    grid-template-columns: 36px 1fr 60px;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px dotted var(--line);
+    align-items: baseline;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 17px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+  }
+  .toc-name {
+    font-family: 'Marcellus', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .toc-name em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .toc-page {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--stone);
+    text-align: right;
+  }
+
+  /* ==================== SECTION HERO ==================== */
+  .section-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 50px;
+  }
+  .section-hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .section-number {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 14px;
+    color: var(--rust);
+    letter-spacing: 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-number::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--rust);
+  }
+  .section-title {
+    font-family: 'Marcellus', serif;
+    font-size: 48px;
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .section-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .section-hero-right {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2a2a2a;
+    max-width: 380px;
+    padding-bottom: 6px;
+  }
+  .section-hero-right em { font-style: italic; color: var(--rust); }
+
+  /* ==================== CONSTRUCTION GRID (from v2) ==================== */
+  .construction-block {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 60px 30px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .construction-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    justify-content: center;
+    z-index: 2;
+    flex-wrap: wrap;
+  }
+  .construction-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .construction-symbol {
+    width: 56px;
+    height: 56px;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .construction-wordmark {
+    font-family: 'Marcellus', serif;
+    font-size: 76px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    line-height: 0.73;
+    position: relative;
+    z-index: 2;
+  }
+  .construction-caption {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  /* ==================== ANATOMY RULES ==================== */
+  .anatomy-rules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    background: var(--paper-shade);
+  }
+  .rule-item {
+    padding: 22px 26px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .rule-item:nth-child(2n) { border-right: none; }
+  .rule-item:nth-last-child(-n+2) { border-bottom: none; }
+  .rule-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+  }
+  .rule-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .rule-value strong { font-weight: 500; }
+
+  /* ==================== CLEAR SPACE (from v2) ==================== */
+  .clearspace-stage {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 40px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .clearspace-frame {
+    position: relative;
+    padding: 44px;
+  }
+  .clearspace-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px dashed var(--rust);
+    opacity: 0.55;
+  }
+  .clearspace-inner {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .clearspace-frame svg.mark {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .clearspace-wordmark {
+    font-family: 'Marcellus', serif;
+    font-size: 60px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    line-height: 0.73;
+  }
+  .clearspace-corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--rust);
+    background: rgba(138, 63, 44, 0.05);
+  }
+  .clearspace-corner.tl { top: 0; left: 0; }
+  .clearspace-corner.tr { top: 0; right: 0; }
+  .clearspace-corner.bl { bottom: 0; left: 0; }
+  .clearspace-corner.br { bottom: 0; right: 0; }
+  .clearspace-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  /* ==================== LOCKUPS ==================== */
+  .lockup-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .lockup-stage {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 50px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .lockup-stage.dark { background: #1f1a14; }
+  .lockup-stage-label {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+  .lockup-stage.dark .lockup-stage-label {
+    color: rgba(241, 232, 212, 0.5);
+  }
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .lockup svg.mark {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  .lockup .wordmark {
+    font-family: 'Marcellus', serif;
+    font-size: 55px;
+    letter-spacing: 0.06em;
+    line-height: 0.73;
+    color: var(--ink);
+  }
+  .lockup-stage.dark .wordmark { color: var(--paper); }
+
+  /* ==================== SIZE LADDER (from v2) ==================== */
+  .ladder {
+    margin-top: 24px;
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 24px 36px;
+  }
+  .ladder-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .ladder-row:last-child { border-bottom: none; }
+  .ladder-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+  }
+  .ladder-label strong {
+    font-style: normal;
+    font-family: 'Marcellus', serif;
+    color: var(--rust);
+    font-size: 13px;
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.1em;
+  }
+  .lockup.size-hero { gap: 26px; }
+  .lockup.size-hero svg.mark { width: 50px; height: 50px; }
+  .lockup.size-hero .wordmark { font-size: 68px; }
+  .lockup.size-standard { gap: 20px; }
+  .lockup.size-standard svg.mark { width: 38px; height: 38px; }
+  .lockup.size-standard .wordmark { font-size: 52px; }
+  .lockup.size-small { gap: 14px; }
+  .lockup.size-small svg.mark { width: 28px; height: 28px; }
+  .lockup.size-small .wordmark { font-size: 38px; }
+  .lockup.size-tiny { gap: 10px; }
+  .lockup.size-tiny svg.mark { width: 18px; height: 18px; }
+  .lockup.size-tiny .wordmark { font-size: 25px; }
+
+  /* ==================== USE CASES (from v2) ==================== */
+  .usecases-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+  }
+
+  /* Business card */
+  .card-mockup {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 36px;
+    aspect-ratio: 1.7 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-top svg { width: 24px; height: 24px; }
+  .card-top .name {
+    font-family: 'Marcellus', serif;
+    font-size: 33px;
+    letter-spacing: 0.06em;
+    line-height: 0.73;
+    color: var(--ink);
+  }
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .card-person {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .card-person-name {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .card-person-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+  }
+  .card-contact {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* Letterhead */
+  .letterhead {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 32px;
+    aspect-ratio: 0.75 / 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .letterhead-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .letterhead-top svg { width: 20px; height: 20px; }
+  .letterhead-top .name {
+    font-family: 'Marcellus', serif;
+    font-size: 27px;
+    letter-spacing: 0.06em;
+    line-height: 0.73;
+  }
+  .letterhead-divider {
+    height: 1px;
+    background: var(--line);
+    margin-bottom: 24px;
+  }
+  .letterhead-body { flex: 1; }
+  .letterhead-line {
+    height: 3px;
+    background: rgba(31,26,20,0.07);
+    border-radius: 1px;
+    margin-bottom: 7px;
+  }
+  .letterhead-line.short { width: 60%; }
+  .letterhead-line.medium { width: 80%; }
+  .letterhead-footer {
+    font-size: 7px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  /* ==================== DON'TS (from v2) ==================== */
+  .donts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .dont-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 40px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    position: relative;
+  }
+  .dont-card::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--rust);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23f4ede0'%3E%3Cpath d='M5 5 L15 15 M15 5 L5 15' stroke='%23f4ede0' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .dont-mock {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .dont-mock svg.mark { width: 30px; height: 30px; }
+  .dont-mock .wordmark {
+    font-family: 'Marcellus', serif;
+    font-size: 30px;
+    letter-spacing: 0.06em;
+    line-height: 0.73;
+  }
+  .dont-label {
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+  }
+
+  /* ==================== TYPOGRAPHY ==================== */
+  .type-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .type-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 40px 36px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .type-card .glyph-display {
+    font-size: 110px;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .type-card.marcellus .glyph-display {
+    font-family: 'Marcellus', serif;
+  }
+  .type-card.fraunces .glyph-display {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .type-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .type-name {
+    font-family: 'Marcellus', serif;
+    font-size: 19px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .type-role {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+  }
+  .type-uses {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #2a2a2a;
+  }
+  .type-sample {
+    margin-top: 20px;
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 40px 50px;
+  }
+  .type-sample-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 16px;
+  }
+  .type-sample-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .type-sample-text em { font-style: italic; color: var(--rust); }
+
+  /* ==================== COLOR ==================== */
+  .palette-hero {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .swatch {
+    aspect-ratio: 1 / 1.35;
+    border: 1px solid var(--line-soft);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .swatch.parchment { background: #f4ede0; color: var(--ink); }
+  .swatch.rust { background: var(--rust); color: #f4ede0; }
+  .swatch.ink { background: var(--ink); color: #f4ede0; }
+  .swatch.ochre { background: var(--ochre); color: var(--ink); }
+  .swatch-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .swatch-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    opacity: 0.65;
+  }
+  .swatch-role {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 10px;
+    text-align: right;
+    opacity: 0.75;
+  }
+  .swatch-name {
+    font-family: 'Marcellus', serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+  .swatch-hex {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+    margin-top: 5px;
+  }
+
+  /* ==================== VOICE ==================== */
+  .voice-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .voice-col {
+    padding: 40px;
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+  }
+  .voice-col-header {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .voice-col ul { list-style: none; }
+  .voice-col li {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding: 9px 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .voice-col li:last-child { border-bottom: none; }
+  .voice-col li::before {
+    content: "—  ";
+    color: var(--rust);
+  }
+  .voice-sample {
+    margin-top: 24px;
+    padding: 50px 60px;
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+  .voice-sample-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 20px;
+  }
+  .voice-sample-line {
+    font-family: 'Marcellus', serif;
+    font-size: 28px;
+    line-height: 1.35;
+    color: var(--ink);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .voice-sample-line em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ==================== PILLARS ==================== */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .pillar-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 240px;
+  }
+  .pillar-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pillar-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 44px;
+    line-height: 0.85;
+    color: var(--rust);
+    letter-spacing: -0.01em;
+  }
+  .pillar-roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.1em;
+  }
+  .pillar-title {
+    font-family: 'Marcellus', serif;
+    font-size: 21px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .pillar-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .pillar-body {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .pillar-body em { font-style: italic; color: var(--rust); }
+
+  /* ==================== ROADMAP ==================== */
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .phase-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .phase-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 60px;
+    line-height: 0.85;
+    color: var(--rust);
+    letter-spacing: -0.02em;
+  }
+  .phase-when {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+    text-align: right;
+  }
+  .phase-when strong {
+    display: block;
+    font-style: normal;
+    font-family: 'Marcellus', serif;
+    color: var(--ink);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+  }
+  .phase-title {
+    font-family: 'Marcellus', serif;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .phase-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .phase-body {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .phase-body em { font-style: italic; color: var(--rust); }
+  .phase-deliverables {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .phase-deliverables-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 10px;
+  }
+  .phase-deliverables ul { list-style: none; }
+  .phase-deliverables li {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding: 3px 0;
+  }
+  .phase-deliverables li::before {
+    content: "—  ";
+    color: var(--rust);
+    font-style: normal;
+  }
+
+  /* ==================== CLOSING ==================== */
+  .closing-content {
+    text-align: center;
+    padding: 80px 40px;
+  }
+  .closing-mark { margin-bottom: 48px; }
+  .closing-mark svg { width: 48px; height: 48px; }
+  .closing-line {
+    font-family: 'Marcellus', serif;
+    font-size: 32px;
+    line-height: 1.3;
+    color: var(--ink);
+    max-width: 580px;
+    margin: 0 auto 32px;
+  }
+  .closing-line em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .closing-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--stone);
+    letter-spacing: 0.05em;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ==================== PRINT ==================== */
+  @media print {
+    body { background: var(--paper); padding: 0; }
+    .document {
+      box-shadow: none;
+      max-width: 100%;
+    }
+    .document::before, .document::after { display: none; }
+    .page, .cover {
+      page-break-after: always;
+      break-after: page;
+      border-bottom: none;
+      min-height: auto;
+      padding: 60px 50px;
+    }
+    .page:last-child, .cover:last-child {
+      page-break-after: auto;
+    }
+    .print-instructions { display: none !important; }
+  }
+
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 900px) {
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .nav-doc { font-size: 9px; }
+  }
+
+  @media (max-width: 720px) {
+    .page, .cover { padding: 60px 24px; min-height: auto; }
+    .cover-name { font-size: 72px; }
+    .cover-arabic { font-size: 36px; }
+    .cover-statement { font-size: 17px; }
+    .cover-bottom { grid-template-columns: 1fr; gap: 16px; }
+    .section-hero { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+    .section-title { font-size: 36px; }
+    .anatomy-rules { grid-template-columns: 1fr; }
+    .rule-item { border-right: none !important; }
+    .lockup-showcase, .type-pair, .voice-pair, .pillars-grid, .roadmap-grid, .usecases-grid {
+      grid-template-columns: 1fr;
+    }
+    .palette-hero { grid-template-columns: 1fr 1fr; }
+    .donts-grid { grid-template-columns: 1fr; }
+    .ladder-row { grid-template-columns: 1fr; gap: 12px; }
+    .lockup.size-hero .wordmark { font-size: 44px; }
+    .lockup.size-hero svg.mark { width: 32px; height: 32px; }
+    .lockup .wordmark { font-size: 42px; }
+    .lockup svg.mark { width: 30px; height: 30px; }
+    .construction-wordmark { font-size: 48px; }
+    .construction-symbol { width: 36px; height: 36px; }
+    .clearspace-wordmark { font-size: 44px; }
+    .clearspace-frame svg.mark { width: 32px; height: 32px; }
+    .type-card .glyph-display { font-size: 90px; }
+    .voice-sample-line { font-size: 20px; }
+    .closing-line { font-size: 22px; }
+    .print-instructions { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<nav>
+  <div class="nav-mark">
+    <svg viewBox="0 0 64 64" fill="none">
+      <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+      <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+    </svg>
+    <div class="name">ATHRA</div>
+  </div>
+  <div class="nav-links">
+    <a href="#identity">Identity</a>
+    <a href="#in-use">In Use</a>
+    <a href="#typography">Typography</a>
+    <a href="#color">Color</a>
+    <a href="#voice">Voice</a>
+    <a href="#pillars">Pillars</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <div class="nav-doc">Brand Guidelines · ٢٠٢٦</div>
+</nav>
+
+<div class="document">
+
+  <!-- ============ COVER ============ -->
+  <section class="cover">
+    <div class="cover-top">
+      <div class="cover-top-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        ATHRA
+      </div>
+      <div>Brand Guidelines · ٢٠٢٦</div>
+    </div>
+
+    <div class="cover-middle">
+      <div class="cover-stamp">
+        <span class="dot"></span>
+        The Brand Guidelines
+      </div>
+      <div class="cover-big-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+      </div>
+      <h1 class="cover-name">ATHRA</h1>
+      <div class="cover-arabic">أَثَر</div>
+      <div class="cover-rule"></div>
+      <p class="cover-statement">A trace, an <em>imprint</em>, the mark a thing leaves behind. The complete identity, set down on paper.</p>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-bottom-item">
+        <div class="cover-bottom-label">Document</div>
+        <div class="cover-bottom-value">Brand Guidelines, v.١</div>
+      </div>
+      <div class="cover-bottom-item">
+        <div class="cover-bottom-label">Drafted</div>
+        <div class="cover-bottom-value">Dubai, ٢٠٢٦</div>
+      </div>
+      <div class="cover-bottom-item">
+        <div class="cover-bottom-label">For</div>
+        <div class="cover-bottom-value">Internal use</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 2 · CONTENTS ============ -->
+  <section class="page" id="contents">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٢</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">Contents</div>
+          <h2 class="section-title">Six sections, <em>one document.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          Read in order, or jump to the section you need. Each is built to <em>stand on its own.</em>
+        </div>
+      </div>
+
+      <div class="toc-list">
+        <div class="toc-item">
+          <div class="toc-num">٠١</div>
+          <div class="toc-name">Identity <em>— the mark, the rule, the lockups</em></div>
+          <div class="toc-page">p. ٠٣</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٢</div>
+          <div class="toc-name">In Use <em>— applications, scale, misuse</em></div>
+          <div class="toc-page">p. ٠٥</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٣</div>
+          <div class="toc-name">Typography <em>— three typefaces, three voices</em></div>
+          <div class="toc-page">p. ٠٦</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٤</div>
+          <div class="toc-name">Color <em>— four colours, no more</em></div>
+          <div class="toc-page">p. ٠٧</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٥</div>
+          <div class="toc-name">Voice <em>— how we sound</em></div>
+          <div class="toc-page">p. ٠٨</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٦</div>
+          <div class="toc-name">Pillars <em>— what we abide by</em></div>
+          <div class="toc-page">p. ٠٩</div>
+        </div>
+        <div class="toc-item">
+          <div class="toc-num">٠٧</div>
+          <div class="toc-name">Roadmap <em>— the order of building</em></div>
+          <div class="toc-page">p. ١٠</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>Contents</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 3 · IDENTITY (mark + construction) ============ -->
+  <section class="page" id="identity">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٣</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠١ · Identity</div>
+          <h2 class="section-title">The <em>mark</em>, and the rule that governs it.</h2>
+        </div>
+        <div class="section-hero-right">
+          Two squares set diagonally, with no enclosing frame. The space between them is the <em>trace itself.</em> One rule governs everything that follows.
+        </div>
+      </div>
+
+      <div class="construction-block">
+        <div class="construction-grid"></div>
+        <div class="construction-inner">
+          <svg class="construction-symbol" viewBox="0 0 64 64" fill="none">
+            <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+            <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+          </svg>
+          <div class="construction-wordmark">ATHRA</div>
+        </div>
+      </div>
+      <div class="construction-caption">— built on a ١٦px unit grid · the mark is ٤ × ٤ units —</div>
+
+      <div class="anatomy-rules" style="margin-top: 30px;">
+        <div class="rule-item">
+          <div class="rule-label">— construction —</div>
+          <div class="rule-value">Built on a <strong>4 × 4 grid.</strong> Each square is 2 × 2 units, meeting at center. Rust top-right, ink bottom-left.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-label">— symbol height —</div>
+          <div class="rule-value">Always equal to the <strong>wordmark's cap height.</strong> Top of mark aligns with top of A.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-label">— gap —</div>
+          <div class="rule-value">Between mark and wordmark: <strong>half the mark's height.</strong> Never varies.</div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-label">— letter-spacing —</div>
+          <div class="rule-value">Wordmark always at <strong>0.06em.</strong> Never tighter, never wider.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠١ · Identity</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 4 · IDENTITY CONT (clear space + lockups + Arabic) ============ -->
+  <section class="page" id="identity-cont">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٤</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠١ · Identity, cont.</div>
+          <h2 class="section-title">Clear space and <em>lockups.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          One mark-height of breathing room on every side. The lockup works in <em>light and dark</em>, with the second mark reversed to ochre and parchment.
+        </div>
+      </div>
+
+      <!-- Clear space -->
+      <div class="clearspace-stage">
+        <div class="clearspace-frame">
+          <div class="clearspace-corner tl"></div>
+          <div class="clearspace-corner tr"></div>
+          <div class="clearspace-corner bl"></div>
+          <div class="clearspace-corner br"></div>
+          <div class="clearspace-inner">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="clearspace-wordmark">ATHRA</div>
+          </div>
+        </div>
+      </div>
+      <div class="clearspace-label" style="margin-top: 12px;">— dashed boundary is the minimum clear space —</div>
+
+      <!-- Lockups: light & dark -->
+      <div class="lockup-showcase" style="margin-top: 30px;">
+        <div class="lockup-stage">
+          <div class="lockup-stage-label">— primary —</div>
+          <div class="lockup">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+        <div class="lockup-stage dark">
+          <div class="lockup-stage-label">— reversed —</div>
+          <div class="lockup">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#b8893a"/>
+              <rect x="0" y="32" width="32" height="32" fill="#f1e8d4"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠١ · Identity, cont.</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 5 · IN USE (size ladder + stationery + don'ts) ============ -->
+  <section class="page" id="in-use">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٥</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٢ · In Use</div>
+          <h2 class="section-title">From <em>facade</em> to <em>favicon.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          The same lockup at every scale, with the same proportions. Below: real applications, and the <em>three ways the lockup can break.</em>
+        </div>
+      </div>
+
+      <!-- Size ladder -->
+      <div class="ladder">
+        <div class="ladder-row">
+          <div class="ladder-label"><strong>Hero · ٦٠</strong>Covers, signage</div>
+          <div class="lockup size-hero">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-label"><strong>Standard · ٤٤</strong>Decks, documents</div>
+          <div class="lockup size-standard">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-label"><strong>Small · ٣٠</strong>Cards, headers</div>
+          <div class="lockup size-small">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+        <div class="ladder-row">
+          <div class="ladder-label"><strong>Tiny · ١٨</strong>Nav, footers</div>
+          <div class="lockup size-tiny">
+            <svg class="mark" viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="wordmark">ATHRA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stationery applications -->
+      <div class="usecases-grid" style="margin-top: 24px;">
+        <div class="card-mockup">
+          <div class="card-top">
+            <svg viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="name">ATHRA</div>
+          </div>
+          <div class="card-bottom">
+            <div class="card-person">
+              <div class="card-person-name">Adel</div>
+              <div class="card-person-title">Founder</div>
+            </div>
+            <div class="card-contact">
+              adel@athra.com<br>
+              Dubai · DIFC
+            </div>
+          </div>
+        </div>
+
+        <div class="letterhead">
+          <div class="letterhead-top">
+            <svg viewBox="0 0 64 64" fill="none">
+              <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+              <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+            </svg>
+            <div class="name">ATHRA</div>
+          </div>
+          <div class="letterhead-divider"></div>
+          <div class="letterhead-body">
+            <div class="letterhead-line"></div>
+            <div class="letterhead-line medium"></div>
+            <div class="letterhead-line"></div>
+            <div class="letterhead-line short"></div>
+            <div class="letterhead-line"></div>
+            <div class="letterhead-line medium"></div>
+          </div>
+          <div class="letterhead-footer">DIFC · Dubai</div>
+        </div>
+      </div>
+
+      <!-- Don'ts -->
+      <div class="donts-grid">
+        <div>
+          <div class="dont-card">
+            <div class="dont-mock">
+              <svg viewBox="0 0 64 64" fill="none" style="width: 16px; height: 16px;">
+                <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+                <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+              </svg>
+              <div class="wordmark" style="font-size: 36px;">ATHRA</div>
+            </div>
+          </div>
+          <div class="dont-label">undersized mark</div>
+        </div>
+        <div>
+          <div class="dont-card">
+            <div class="dont-mock">
+              <svg viewBox="0 0 64 64" fill="none" style="width: 52px; height: 52px;">
+                <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+                <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+              </svg>
+              <div class="wordmark" style="font-size: 22px;">ATHRA</div>
+            </div>
+          </div>
+          <div class="dont-label">oversized mark</div>
+        </div>
+        <div>
+          <div class="dont-card">
+            <div class="dont-mock" style="gap: 3px;">
+              <svg viewBox="0 0 64 64" fill="none" style="width: 30px; height: 30px;">
+                <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+                <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+              </svg>
+              <div class="wordmark" style="font-size: 30px;">ATHRA</div>
+            </div>
+          </div>
+          <div class="dont-label">cramped gap</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٢ · In Use</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 6 · TYPOGRAPHY ============ -->
+  <section class="page" id="typography">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٦</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٣ · Typography</div>
+          <h2 class="section-title">Two typefaces, <em>two voices.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          Marcellus carries the <em>statement</em>. Fraunces italic carries the <em>whisper</em>. One declares what is true, the other says how we think about it.
+        </div>
+      </div>
+
+      <div class="type-pair">
+        <div class="type-card marcellus">
+          <div class="glyph-display">Aa</div>
+          <div class="type-card-info">
+            <div class="type-name">MARCELLUS</div>
+            <div class="type-role">— statement & structure —</div>
+            <div class="type-uses">Wordmarks, titles, large numbers, pull quotes. Uppercase headings at 0.06em letter-spacing.</div>
+          </div>
+        </div>
+        <div class="type-card fraunces">
+          <div class="glyph-display">Aa</div>
+          <div class="type-card-info">
+            <div class="type-name">FRAUNCES ITALIC</div>
+            <div class="type-role">— whisper & editorial —</div>
+            <div class="type-uses">Body copy, captions, marginalia, emphasis. Italic for editorial moments and rust accents.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-sample">
+        <div class="type-sample-label">— body copy in use —</div>
+        <p class="type-sample-text">The strongest move in any room is rarely the loudest. It is the one that everyone else <em>quiets down to hear.</em> Athra writes the way a private bank writes a letter to a long-standing client — assuming the reader's intelligence, never their attention. The sentences are short or long, never medium.</p>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٣ · Typography</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 7 · COLOR ============ -->
+  <section class="page" id="color">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٧</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٤ · Color</div>
+          <h2 class="section-title">Four colors, <em>no more.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          Restrained on purpose. <em>Parchment</em> grounds. <em>Ink</em> voices. <em>Rust</em> accents. <em>Ochre</em> is reserved for dark applications only.
+        </div>
+      </div>
+
+      <div class="palette-hero">
+        <div class="swatch parchment">
+          <div class="swatch-top">
+            <div class="swatch-num">٠١</div>
+            <div class="swatch-role">the ground</div>
+          </div>
+          <div>
+            <div class="swatch-name">Parchment</div>
+            <div class="swatch-hex">#F4EDE0</div>
+          </div>
+        </div>
+        <div class="swatch rust">
+          <div class="swatch-top">
+            <div class="swatch-num">٠٢</div>
+            <div class="swatch-role">the accent</div>
+          </div>
+          <div>
+            <div class="swatch-name">Rust</div>
+            <div class="swatch-hex">#8A3F2C</div>
+          </div>
+        </div>
+        <div class="swatch ink">
+          <div class="swatch-top">
+            <div class="swatch-num">٠٣</div>
+            <div class="swatch-role">the voice</div>
+          </div>
+          <div>
+            <div class="swatch-name">Ink</div>
+            <div class="swatch-hex">#1F1A14</div>
+          </div>
+        </div>
+        <div class="swatch ochre">
+          <div class="swatch-top">
+            <div class="swatch-num">٠٤</div>
+            <div class="swatch-role">reserved</div>
+          </div>
+          <div>
+            <div class="swatch-name">Ochre</div>
+            <div class="swatch-hex">#B8893A</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٤ · Color</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 8 · VOICE ============ -->
+  <section class="page" id="voice">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٨</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٥ · Voice</div>
+          <h2 class="section-title">How we <em>sound.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          Athra sounds like a thoughtful person speaking quietly in a room of senior people who already trust them. We <em>never signal urgency we do not feel.</em>
+        </div>
+      </div>
+
+      <div class="voice-pair">
+        <div class="voice-col">
+          <div class="voice-col-header">— how we sound —</div>
+          <ul>
+            <li>composed</li>
+            <li>literary, but not ornate</li>
+            <li>specific, never abstract</li>
+            <li>quiet about its own capability</li>
+            <li>certain without insistence</li>
+            <li>willing to leave silence</li>
+          </ul>
+        </div>
+        <div class="voice-col">
+          <div class="voice-col-header">— how we never sound —</div>
+          <ul>
+            <li>eager to close</li>
+            <li>self-congratulatory</li>
+            <li>full of jargon or futurism</li>
+            <li>"world-class," "best-in-class," "leading"</li>
+            <li>generic executive-education prose</li>
+            <li>desperate</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="voice-sample">
+        <div class="voice-sample-label">— the voice, in one sentence —</div>
+        <div class="voice-sample-line">The thing that <em>remains</em> when the consultants leave.</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٥ · Voice</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 9 · PILLARS ============ -->
+  <section class="page" id="pillars">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">٠٩</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٦ · Pillars</div>
+          <h2 class="section-title">What we <em>abide by.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          The foundations beneath every decision. Strategy will shift. Programmes will evolve. <em>These do not.</em>
+        </div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠١</div>
+            <div class="pillar-roman">— first principle —</div>
+          </div>
+          <h3 class="pillar-title">Trust is <em>the asset.</em></h3>
+          <p class="pillar-body">Programmes are how we get paid. Trust is what we are actually building. Every engagement is judged by whether it <em>deepens institutional trust</em> — with the client, with their network, with the region.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠٢</div>
+            <div class="pillar-roman">— second principle —</div>
+          </div>
+          <h3 class="pillar-title">Evidence over <em>assertion.</em></h3>
+          <p class="pillar-body">We do not claim capability. We <em>demonstrate it.</em> A signed engagement is worth more than a hundred words about our positioning. The work speaks; we add minimal narration.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠٣</div>
+            <div class="pillar-roman">— third principle —</div>
+          </div>
+          <h3 class="pillar-title">Relationships <em>compound.</em></h3>
+          <p class="pillar-body">A single executive introduction, well-handled, is worth more than a marketing campaign. Growth is relationship-driven, ecosystem-led, <em>never mass-acquired.</em></p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠٤</div>
+            <div class="pillar-roman">— fourth principle —</div>
+          </div>
+          <h3 class="pillar-title">Premium <em>restraint.</em></h3>
+          <p class="pillar-body">Quiet beats loud. Restraint signals confidence. <em>Less, better-set, better-spaced.</em> Across writing, design, decks, and rooms — we never crowd, never oversell.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠٥</div>
+            <div class="pillar-roman">— fifth principle —</div>
+          </div>
+          <h3 class="pillar-title">Regional <em>fluency.</em></h3>
+          <p class="pillar-body">Athra is a GCC company first. We work in Arabic and English with equal care, understand the institutional dynamics of the region, and <em>never import frameworks</em> without testing them locally.</p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-header">
+            <div class="pillar-num">٠٦</div>
+            <div class="pillar-roman">— sixth principle —</div>
+          </div>
+          <h3 class="pillar-title">Long over <em>loud.</em></h3>
+          <p class="pillar-body">Every decision is weighed against the company we want to be in ten years, not the deal we want to close this quarter. <em>Reputation outlasts revenue.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٦ · Pillars</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 10 · ROADMAP ============ -->
+  <section class="page" id="roadmap">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">١٠</div>
+    </div>
+
+    <div class="page-body">
+      <div class="section-hero">
+        <div class="section-hero-left">
+          <div class="section-number">٠٧ · Roadmap</div>
+          <h2 class="section-title">Four phases. Each <em>earns the next.</em></h2>
+        </div>
+        <div class="section-hero-right">
+          No phase begins before the previous one has produced its proof. <em>The order matters.</em>
+        </div>
+      </div>
+
+      <div class="roadmap-grid">
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">١</div>
+            <div class="phase-when">
+              <strong>Months ١–٣</strong>
+              the foundation
+            </div>
+          </div>
+          <h3 class="phase-title">Set the <em>foundation.</em></h3>
+          <p class="phase-body">Before anything is shown, the company must exist in its own materials. The mark, lockup, color, type, and writing voice <em>set down once</em>, so every later decision flows from the same source.</p>
+          <div class="phase-deliverables">
+            <div class="phase-deliverables-label">— deliverables —</div>
+            <ul>
+              <li>Identity manual</li>
+              <li>Bilingual lockup</li>
+              <li>Stationery suite</li>
+              <li>Voice & messaging guide</li>
+              <li>Domain & email architecture</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">٢</div>
+            <div class="phase-when">
+              <strong>Months ٣–٦</strong>
+              made visible
+            </div>
+          </div>
+          <h3 class="phase-title">Make the company <em>visible.</em></h3>
+          <p class="phase-body">The minimum public surface a serious institutional buyer expects. Not a marketing site — a dense, well-set environment that says, <em>without saying it,</em> that the company is already in motion.</p>
+          <div class="phase-deliverables">
+            <div class="phase-deliverables-label">— deliverables —</div>
+            <ul>
+              <li>Website, ٥–٧ pages</li>
+              <li>One published case study</li>
+              <li>Capability deck</li>
+              <li>Expert network page</li>
+              <li>LinkedIn presence</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">٣</div>
+            <div class="phase-when">
+              <strong>Months ٦–١٢</strong>
+              first engagement
+            </div>
+          </div>
+          <h3 class="phase-title">Earn the first <em>engagement.</em></h3>
+          <p class="phase-body">One signed engagement, well-chosen, well-delivered. The shape of the company is decided by its first client. <em>Choose carefully.</em> Everything that follows is built on this proof.</p>
+          <div class="phase-deliverables">
+            <div class="phase-deliverables-label">— deliverables —</div>
+            <ul>
+              <li>First custom programme delivered</li>
+              <li>First expert convening</li>
+              <li>Programme architecture documented</li>
+              <li>Two new case studies in draft</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-num">٤</div>
+            <div class="phase-when">
+              <strong>Months ١٢–١٨</strong>
+              the ecosystem
+            </div>
+          </div>
+          <h3 class="phase-title">Build the <em>ecosystem layer.</em></h3>
+          <p class="phase-body">Once the programmes have produced their evidence, the company begins to behave like a platform. The council convenes. The forums begin. Athra <em>stops describing itself</em> as a capability platform and starts being one.</p>
+          <div class="phase-deliverables">
+            <div class="phase-deliverables-label">— deliverables —</div>
+            <ul>
+              <li>Standing executive council</li>
+              <li>Open enrolment programme launched</li>
+              <li>Certifications partnership signed</li>
+              <li>Riyadh proximity established</li>
+              <li>Year-one annual review published</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>٠٧ · Roadmap</span>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 11 · CLOSING ============ -->
+  <section class="page" id="closing">
+    <div class="page-header">
+      <div class="page-header-mark">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+          <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+        </svg>
+        <span class="name">ATHRA</span>
+      </div>
+      <div class="page-header-meta">— Brand Guidelines · ٢٠٢٦ —</div>
+      <div class="page-header-num">١١</div>
+    </div>
+
+    <div class="page-body" style="padding: 60px 0;">
+      <div class="closing-content">
+        <div class="closing-mark">
+          <svg viewBox="0 0 64 64" fill="none">
+            <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+            <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+          </svg>
+        </div>
+        <div class="closing-line">A company is built twice — first as an <em>idea on paper</em>, then as an <em>imprint in the world.</em></div>
+        <div class="closing-sub">These are the guidelines. To be revised when the work demands it, and not before.</div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Athra · Brand Guidelines</span>
+      <span>End of document</span>
+    </div>
+  </section>
+
+</div>
+
+</main>
+</body>
+</html>
