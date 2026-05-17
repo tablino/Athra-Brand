@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Athra — Executive Capability for the Institutions That Will Still Matter in Twenty Years</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Marcellus&family=Inter:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f1e8d4;
+    --paper-shade: #e8dec7;
+    --paper-deep: #d8cca9;
+    --ink: #1f1a14;
+    --rust: #8a3f2c;
+    --rust-deep: #6b2f20;
+    --ochre: #b8893a;
+    --stone: #8a7f68;
+    --line: rgba(31, 26, 20, 0.15);
+    --line-soft: rgba(31, 26, 20, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 30%, rgba(139, 110, 70, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(139, 110, 70, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  main { position: relative; z-index: 2; }
+
+  /* ============ NAV ============ */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(241, 232, 212, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  .nav-mark { display: flex; align-items: center; gap: 12px; }
+  .nav-mark svg { width: 20px; height: 20px; }
+  .nav-mark .name {
+    font-family: 'Marcellus', serif;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    font-family: 'Marcellus', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 10px 18px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--rust); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 140px 80px 100px;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    margin-bottom: 36px;
+  }
+  .hero-eyebrow .dot {
+    width: 5px; height: 5px;
+    background: var(--rust);
+    border-radius: 50%;
+  }
+  .hero-title {
+    font-family: 'Marcellus', serif;
+    font-size: 96px;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 40px;
+    max-width: 1000px;
+  }
+  .hero-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 40px;
+  }
+  .hero-lede {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.55;
+    color: #2a2a2a;
+  }
+  .hero-lede em { font-style: italic; color: var(--rust); }
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-left: 40px;
+    border-left: 1px solid var(--line);
+  }
+  .hero-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 1px dotted var(--line);
+  }
+  .hero-meta-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .hero-meta-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .hero-meta-value {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .hero-meta-value strong {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-style: normal;
+    color: var(--rust);
+  }
+
+  /* ============ SECTION SCAFFOLDING ============ */
+  section.block {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 80px;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 80px;
+  }
+  .block-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  .block-hero-left { display: flex; flex-direction: column; gap: 28px; }
+  .block-number {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .block-number::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--rust);
+  }
+  .block-title {
+    font-family: 'Marcellus', serif;
+    font-size: 64px;
+    line-height: 0.98;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .block-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .block-hero-right {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #2a2a2a;
+    max-width: 460px;
+    padding-bottom: 8px;
+  }
+  .block-hero-right em { font-style: italic; color: var(--rust); }
+
+  /* ============ WHAT WE DO ============ */
+  .offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .offering-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.3s;
+  }
+  .offering-card:hover { background: var(--paper-deep); }
+  .offering-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .offering-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 52px;
+    line-height: 0.85;
+    color: var(--rust);
+    letter-spacing: -0.01em;
+  }
+  .offering-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--stone);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+  .offering-title {
+    font-family: 'Marcellus', serif;
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .offering-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .offering-body {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2a2a2a;
+  }
+  .offering-body em { font-style: italic; color: var(--rust); }
+  .offering-foot {
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 1px dotted var(--line);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--stone);
+  }
+
+  /* ============ NUMBERS / PROOF ============ */
+  .proof {
+    background: var(--paper-shade);
+    border-radius: 0;
+    border: 1px solid var(--line);
+    padding: 80px 60px;
+    margin: 60px 0;
+  }
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .proof-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 1px solid var(--line);
+    padding-right: 30px;
+  }
+  .proof-stat:last-child { border-right: none; }
+  .proof-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 64px;
+    line-height: 0.9;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .proof-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    line-height: 1.5;
+  }
+
+  /* ============ PARTNERS / UNIVERSITIES ============ */
+  .partners-intro {
+    max-width: 720px;
+    margin-bottom: 50px;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .partners-intro em { font-style: italic; color: var(--rust); }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    background: var(--paper-shade);
+  }
+  .partner-card {
+    padding: 40px 36px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 220px;
+  }
+  .partner-card:nth-child(3n) { border-right: none; }
+  .partner-card:nth-last-child(-n+3) { border-bottom: none; }
+  .partner-region {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 4px;
+  }
+  .partner-name {
+    font-family: 'Marcellus', serif;
+    font-size: 21px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .partner-desc {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--stone);
+    margin-top: auto;
+  }
+
+  /* ============ COUNCIL OF EXPERTS ============ */
+  .council-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .expert-card {
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .expert-portrait {
+    width: 80px;
+    height: 80px;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Marcellus', serif;
+    font-size: 28px;
+    color: var(--rust);
+    letter-spacing: 0.02em;
+  }
+  .expert-name {
+    font-family: 'Marcellus', serif;
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .expert-role {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    line-height: 1.4;
+    padding-bottom: 16px;
+    border-bottom: 1px dotted var(--line);
+  }
+  .expert-bio {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #2a2a2a;
+  }
+  .expert-bio em { font-style: italic; color: var(--rust); }
+
+  /* ============ CASE STUDIES ============ */
+  .case-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .case-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    gap: 40px;
+    padding: 40px;
+    background: var(--paper-shade);
+    border: 1px solid var(--line);
+    align-items: start;
+    transition: background 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .case-row:hover { background: var(--paper-deep); }
+  .case-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 48px;
+    line-height: 0.85;
+    color: var(--rust);
+  }
+  .case-body { display: flex; flex-direction: column; gap: 12px; }
+  .case-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+  .case-title {
+    font-family: 'Marcellus', serif;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .case-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .case-summary {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #2a2a2a;
+    max-width: 600px;
+  }
+  .case-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: right;
+    padding-top: 4px;
+  }
+  .case-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .case-meta-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+  .case-meta-value {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  /* ============ PULL QUOTE ============ */
+  .pullquote-section {
+    background: #0f0e0c;
+    padding: 140px 80px;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .pullquote-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.9 0 0 0 0 0.8 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .pullquote-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .pullquote-mark {
+    margin-bottom: 50px;
+  }
+  .pullquote-mark svg { width: 44px; height: 44px; }
+  .pullquote-text {
+    font-family: 'Marcellus', serif;
+    font-size: 44px;
+    line-height: 1.3;
+    color: var(--paper);
+    max-width: 880px;
+    margin: 0 auto 36px;
+  }
+  .pullquote-text em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ochre);
+  }
+  .pullquote-attr {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(241, 232, 212, 0.7);
+    letter-spacing: 0.05em;
+  }
+
+  /* ============ SECTORS ============ */
+  .sectors-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+    background: var(--paper-shade);
+  }
+  .sector-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding: 32px 36px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    align-items: start;
+  }
+  .sector-row:nth-child(2n) { border-right: none; }
+  .sector-row:nth-last-child(-n+2) { border-bottom: none; }
+  .sector-num {
+    font-family: 'Marcellus', 'Amiri', serif;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+  .sector-content { display: flex; flex-direction: column; gap: 8px; }
+  .sector-name {
+    font-family: 'Marcellus', serif;
+    font-size: 19px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .sector-desc {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #2a2a2a;
+  }
+  .sector-desc em { font-style: italic; color: var(--rust); }
+
+  /* ============ CTA / FOOTER ============ */
+  .cta-section {
+    padding: 140px 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  .cta-eyebrow {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+  .cta-title {
+    font-family: 'Marcellus', serif;
+    font-size: 56px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 32px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-title em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .cta-sub {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #2a2a2a;
+    max-width: 580px;
+    margin: 0 auto 48px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px 36px;
+    font-family: 'Marcellus', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-button:hover { background: var(--rust); }
+
+  footer {
+    background: #0f0e0c;
+    color: var(--paper);
+    padding: 100px 80px 50px;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(241, 232, 212, 0.15);
+    margin-bottom: 40px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-mark { display: flex; align-items: center; gap: 16px; }
+  .footer-mark svg { width: 36px; height: 36px; }
+  .footer-mark .name {
+    font-family: 'Marcellus', serif;
+    font-size: 42px;
+    letter-spacing: 0.06em;
+    line-height: 0.73;
+  }
+  .footer-statement {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(241, 232, 212, 0.7);
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col a {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(241, 232, 212, 0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--paper); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(241, 232, 212, 0.4);
+    padding-top: 20px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    nav { padding: 14px 24px; gap: 16px; }
+    .nav-links { display: none; }
+    .hero { padding: 70px 24px 50px; }
+    .hero-title { font-size: 44px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-meta { padding-left: 0; border-left: none; padding-top: 24px; border-top: 1px solid var(--line); }
+    .hero-lede { font-size: 17px; }
+
+    section.block { padding: 60px 24px; }
+    .block-hero { grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; }
+    .block-title { font-size: 34px; }
+
+    .offerings-grid { grid-template-columns: 1fr; }
+    .offering-card { padding: 32px 28px; }
+
+    .proof { padding: 40px 30px; }
+    .proof-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .proof-stat { border-right: none; padding-right: 0; }
+    .proof-num { font-size: 44px; }
+
+    .partners-grid { grid-template-columns: 1fr; }
+    .partner-card { border-right: none; min-height: auto; }
+
+    .council-grid { grid-template-columns: 1fr; }
+
+    .case-row { grid-template-columns: 1fr; gap: 16px; padding: 28px; }
+    .case-meta { text-align: left; flex-direction: row; flex-wrap: wrap; gap: 20px; }
+
+    .pullquote-section { padding: 80px 24px; }
+    .pullquote-text { font-size: 24px; }
+
+    .sectors-list { grid-template-columns: 1fr; }
+    .sector-row { border-right: none; }
+
+    .cta-section { padding: 80px 24px; }
+    .cta-title { font-size: 34px; }
+    .cta-sub { font-size: 16px; }
+
+    footer { padding: 60px 24px 30px; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-mark">
+    <svg viewBox="0 0 64 64" fill="none">
+      <rect x="32" y="0" width="32" height="32" fill="#8a3f2c"/>
+      <rect x="0" y="32" width="32" height="32" fill="#1f1a14"/>
+    </svg>
+    <div class="name">ATHRA</div>
+  </div>
+  <div class="nav-links">
+    <a href="#what-we-do">What We Do</a>
+    <a href="#sectors">Sectors</a>
+    <a href="#council">The Council</a>
+    <a href="#partners">Partners</a>
+    <a href="#work">Work</a>
+  </div>
+  <a href="#engage" class="nav-cta">Begin a Conversation</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-eyebrow">
+    <span class="dot"></span>
+    Executive Capability · GCC
+  </div>
+  <h1 class="hero-title">The thing that <em>remains</em> when the consultants leave.</h1>
+  <div class="hero-grid">
+    <p class="hero-lede">
+      Athra is a GCC executive capability platform. We work with the institutions, family enterprises, and sovereign-linked organisations that <em>intend to still matter in twenty years</em> — and we help them build the leadership capability to do it. Programmes, councils, advisory engagements. <em>Trust as the asset.</em>
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <div class="hero-meta-label">Founded</div>
+        <div class="hero-meta-value"><strong>٢٠٢٦</strong> · Dubai</div>
+      </div>
+      <div class="hero-meta-row">
+        <div class="hero-meta-label">Engagements</div>
+        <div class="hero-meta-value"><strong>٢٧</strong> across the GCC</div>
+      </div>
+      <div class="hero-meta-row">
+        <div class="hero-meta-label">Experts in network</div>
+        <div class="hero-meta-value"><strong>٤٦</strong> faculty & advisors</div>
+      </div>
+      <div class="hero-meta-row">
+        <div class="hero-meta-label">Languages</div>
+        <div class="hero-meta-value">Arabic & English</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WHAT WE DO ============ -->
+<section class="block" id="what-we-do">
+  <div class="block-hero">
+    <div class="block-hero-left">
+      <div class="block-number">٠١ · What We Do</div>
+      <h2 class="block-title">Five layers, one <em>institutional relationship.</em></h2>
+    </div>
+    <div class="block-hero-right">
+      The programmes are how we are paid. <em>Trust</em> is what we are actually building. Each layer below earns the next — and most engagements span more than one.
+    </div>
+  </div>
+
+  <div class="offerings-grid">
+    <div class="offering-card">
+      <div class="offering-header">
+        <div class="offering-num">٠١</div>
+        <div class="offering-tag">— primary revenue layer —</div>
+      </div>
+      <h3 class="offering-title">Custom Institutional <em>Programmes</em></h3>
+      <p class="offering-body">Bespoke executive development designed around a single institution's strategic agenda. Typically six to eighteen months, with cohorts of <em>twelve to twenty senior leaders</em>, blended in-person and remote, delivered in Arabic, English, or both.</p>
+      <div class="offering-foot">For sovereign-linked organisations, banks, ministries, large corporates.</div>
+    </div>
+
+    <div class="offering-card">
+      <div class="offering-header">
+        <div class="offering-num">٠٢</div>
+        <div class="offering-tag">— authority & visibility —</div>
+      </div>
+      <h3 class="offering-title">Open <em>Enrolment</em></h3>
+      <p class="offering-body">Public-facing programmes on focused topics — governance, succession, executive presence, fintech leadership. Smaller cohorts of fifteen to twenty-five, drawn from across the region. The <em>front door</em> to the platform.</p>
+      <div class="offering-foot">Open application. Two intakes per year, in Dubai and Riyadh.</div>
+    </div>
+
+    <div class="offering-card">
+      <div class="offering-header">
+        <div class="offering-num">٠٣</div>
+        <div class="offering-tag">— credibility layer —</div>
+      </div>
+      <h3 class="offering-title">Certifications &<br/><em>Partner Programmes</em></h3>
+      <p class="offering-body">Delivered with institutional partners including CMT, ACI, and select global business schools. Certifications carry recognised credentials and serve as <em>institutional trust signals</em> for organisations placing their senior teams.</p>
+      <div class="offering-foot">Eight active partnerships across finance and leadership disciplines.</div>
+    </div>
+
+    <div class="offering-card">
+      <div class="offering-header">
+        <div class="offering-num">٠٤</div>
+        <div class="offering-tag">— relationship infrastructure —</div>
+      </div>
+      <h3 class="offering-title">Executive Forums &<br/><em>Convenings</em></h3>
+      <p class="offering-body">Invite-only roundtables, sector councils, family enterprise forums, and private leadership dinners. <em>The room itself is the deliverable.</em> Held three to four times annually across the GCC, by invitation.</p>
+      <div class="offering-foot">No press, no recordings, no public attendee lists.</div>
+    </div>
+
+    <div class="offering-card" style="grid-column: span 2;">
+      <div class="offering-header">
+        <div class="offering-num">٠٥</div>
+        <div class="offering-tag">— long-term engagement —</div>
+      </div>
+      <h3 class="offering-title">Advisory-Learning <em>Engagements</em></h3>
+      <p class="offering-body">For institutions building permanent internal capability infrastructure — corporate academies, in-house executive programmes, succession architectures. Athra advises on design, builds the faculty network, and runs the first one or two cohorts before handing over. Typical engagement: <em>eighteen to thirty-six months.</em></p>
+      <div class="offering-foot">Reserved for institutions willing to make a multi-year commitment to capability.</div>
+    </div>
+  </div>
+
+  <!-- PROOF STATS -->
+  <div class="proof">
+    <div class="proof-grid">
+      <div class="proof-stat">
+        <div class="proof-num">٢٧</div>
+        <div class="proof-label">institutional engagements since founding</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">٤٦</div>
+        <div class="proof-label">faculty and expert advisors in network</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">٤</div>
+        <div class="proof-label">GCC countries with active engagements</div>
+      </div>
+      <div class="proof-stat">
+        <div class="proof-num">٩٢٪</div>
+        <div class="proof-label">of clients return for a second engagement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTORS ============ -->
+<section class="block" id="sectors">
+  <div class="block-hero">
+    <div class="block-hero-left">
+      <div class="block-number">٠٢ · Sectors</div>
+      <h2 class="block-title">Where the work <em>concentrates.</em></h2>
+    </div>
+    <div class="block-hero-right">
+      Athra is deliberately concentrated. We work where capability investment is genuinely strategic — and where <em>relationships compound</em> across multiple engagements within a sector.
+    </div>
+  </div>
+
+  <div class="sectors-list">
+    <div class="sector-row">
+      <div class="sector-num">٠١</div>
+      <div class="sector-content">
+        <div class="sector-name">Government & Public Service</div>
+        <div class="sector-desc">Capability for ministries, regulators, and sovereign-linked entities. <em>Continuity beyond political cycles.</em></div>
+      </div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-num">٠٢</div>
+      <div class="sector-content">
+        <div class="sector-name">Finance & Banking</div>
+        <div class="sector-desc">Central banks, commercial banks, asset managers, sovereign wealth. Includes our certification partnerships.</div>
+      </div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-num">٠٣</div>
+      <div class="sector-content">
+        <div class="sector-name">Family Enterprise & Governance</div>
+        <div class="sector-desc">Succession, next-generation development, family councils, governance architecture. <em>Our strongest long-term vertical.</em></div>
+      </div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-num">٠٤</div>
+      <div class="sector-content">
+        <div class="sector-name">Energy & Sustainability</div>
+        <div class="sector-desc">Energy transition leadership, ESG, decarbonisation strategy. Strong alignment with GCC priorities.</div>
+      </div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-num">٠٥</div>
+      <div class="sector-content">
+        <div class="sector-name">Healthcare Leadership</div>
+        <div class="sector-desc">Clinical leadership, hospital governance, public health institutional capability.</div>
+      </div>
+    </div>
+    <div class="sector-row">
+      <div class="sector-num">٠٦</div>
+      <div class="sector-content">
+        <div class="sector-name">Technology & Transformation</div>
+        <div class="sector-desc">Digital leadership, organisational transformation, technology governance for traditional institutions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PULL QUOTE ============ -->
+<section class="pullquote-section">
+  <div class="pullquote-inner">
+    <div class="pullquote-mark">
+      <svg viewBox="0 0 64 64" fill="none">
+        <rect x="32" y="0" width="32" height="32" fill="#b8893a"/>
+        <rect x="0" y="32" width="32" height="32" fill="#f1e8d4"/>
+      </svg>
+    </div>
+    <div class="pullquote-text">
+      The strongest institutions in this region are built around <em>one person's judgment.</em> Our work is helping that judgment outlive the person.
+    </div>
+    <div class="pullquote-attr">— from the engagement brief, sovereign capability programme · Abu Dhabi · Q٤ ٢٠٢٥</div>
+  </div>
+</section>
+
+<!-- ============ THE COUNCIL ============ -->
+<section class="block" id="council">
+  <div class="block-hero">
+    <div class="block-hero-left">
+      <div class="block-number">٠٣ · The Council</div>
+      <h2 class="block-title">The <em>faculty</em>, the <em>advisors</em>, the <em>convenors.</em></h2>
+    </div>
+    <div class="block-hero-right">
+      Athra's standing council is a network of forty-six experts drawn from <em>academia, industry, and public service.</em> They lead programmes, sit on advisory boards, and convene the forums. A selection below.
+    </div>
+  </div>
+
+  <div class="council-grid">
+    <div class="expert-card">
+      <div class="expert-portrait">NG</div>
+      <div>
+        <div class="expert-name">Prof. Nancy Gleason</div>
+        <div class="expert-role">— global education & institutional design —</div>
+      </div>
+      <div class="expert-bio">Former Director of the Hilary Ballon Center for Teaching & Learning at NYU Abu Dhabi. Advisory faculty across <em>three Athra engagements</em>, focused on institutional pedagogy and the architecture of executive learning.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">YN</div>
+      <div>
+        <div class="expert-name">Prof. Yaw Nyarko</div>
+        <div class="expert-role">— development economics & policy —</div>
+      </div>
+      <div class="expert-bio">Professor of Economics at NYU; founding Director of the NYU Africa House. Convenes <em>economic governance sessions</em> for Athra's central bank and sovereign wealth engagements.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">HF</div>
+      <div>
+        <div class="expert-name">Dr. Harald Freissmuth</div>
+        <div class="expert-role">— corporate finance & capital markets —</div>
+      </div>
+      <div class="expert-bio">Three decades in European and Gulf capital markets. Leads Athra's <em>treasury & risk leadership</em> programmes and chairs the financial sector advisory council.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">DR</div>
+      <div>
+        <div class="expert-name">David Ribott</div>
+        <div class="expert-role">— governance & family enterprise —</div>
+      </div>
+      <div class="expert-bio">Former family office principal; current advisor to four GCC family enterprises on succession architecture. Anchor faculty for Athra's <em>next-generation programme</em>.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">RK</div>
+      <div>
+        <div class="expert-name">Dr. Rasa Karapandza</div>
+        <div class="expert-role">— behavioural finance & decision science —</div>
+      </div>
+      <div class="expert-bio">Quantitative finance scholar with a parallel practice in executive decision-making under uncertainty. Designs Athra's <em>investment committee dynamics</em> modules.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">FB</div>
+      <div>
+        <div class="expert-name">Prof. Felix Hardmood Beck</div>
+        <div class="expert-role">— design thinking & institutional creativity —</div>
+      </div>
+      <div class="expert-bio">Brings design methodology into executive programmes. Convenes Athra's <em>creative leadership lab</em> — quarterly sessions held in Dubai and Sharjah.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">AB</div>
+      <div>
+        <div class="expert-name">Anne Beetham</div>
+        <div class="expert-role">— executive coaching & leadership transitions —</div>
+      </div>
+      <div class="expert-bio">Twenty years coaching C-suite executives through institutional transitions. Lead coach across <em>Athra's senior leadership cohorts.</em></div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">LM</div>
+      <div>
+        <div class="expert-name">Linda Mubarak</div>
+        <div class="expert-role">— women in leadership & public-sector reform —</div>
+      </div>
+      <div class="expert-bio">Architect of women's leadership pipelines across three GCC governments. Convenes Athra's <em>women in leadership executive council</em>.</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-portrait">AM</div>
+      <div>
+        <div class="expert-name">Aman Merchant</div>
+        <div class="expert-role">— innovation strategy & ecosystem design —</div>
+      </div>
+      <div class="expert-bio">Specialist in institutional innovation systems for the Gulf. Designs Athra's <em>transformation leadership</em> programmes for legacy institutions navigating digital change.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="block" id="partners">
+  <div class="block-hero">
+    <div class="block-hero-left">
+      <div class="block-number">٠٤ · Partners & Institutions</div>
+      <h2 class="block-title">Built in <em>relationship</em>, not isolation.</h2>
+    </div>
+    <div class="block-hero-right">
+      Athra operates within a network of academic, institutional, and certification partners — each chosen for <em>depth of relationship</em> and quality of fit.
+    </div>
+  </div>
+
+  <p class="partners-intro">
+    The partnerships below are active as of ٢٠٢٦. Each represents a specific commitment — joint programmes, faculty exchange, certification recognition, or institutional advisory. We <em>do not list logos for decoration.</em> A partner appears here only when a real engagement is in motion.
+  </p>
+
+  <div class="partners-grid">
+    <div class="partner-card">
+      <div class="partner-region">Academic · United States</div>
+      <div class="partner-name">NYU Abu Dhabi<br/>Executive Education</div>
+      <div class="partner-desc">— Joint programme design, faculty exchange, and shared executive education infrastructure.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Academic · United Kingdom</div>
+      <div class="partner-name">London Business School<br/>Middle East</div>
+      <div class="partner-desc">— Custom programme delivery for sovereign-linked clients in finance and leadership.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Academic · Switzerland</div>
+      <div class="partner-name">IMD Lausanne<br/>Executive Programmes</div>
+      <div class="partner-desc">— Joint family enterprise governance certification, two cohorts annually.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Academic · France</div>
+      <div class="partner-name">INSEAD<br/>Middle East Campus</div>
+      <div class="partner-desc">— Advisory partnership on Gulf leadership research and faculty placement.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Certification · Global</div>
+      <div class="partner-name">CMT Association<br/>Technical Analysis</div>
+      <div class="partner-desc">— Recognised certification pathway for Athra's financial markets programmes.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Certification · Global</div>
+      <div class="partner-name">ACI Financial Markets<br/>Association</div>
+      <div class="partner-desc">— Treasury and capital markets certifications integrated into the finance leadership track.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Institutional · UAE</div>
+      <div class="partner-name">Mohammed Bin Rashid<br/>School of Government</div>
+      <div class="partner-desc">— Faculty exchange on public-sector leadership and executive capability.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Institutional · UAE</div>
+      <div class="partner-name">Dubai Centre for<br/>Family Businesses</div>
+      <div class="partner-desc">— Joint convenings and the annual GCC family enterprise forum, held each spring.</div>
+    </div>
+
+    <div class="partner-card">
+      <div class="partner-region">Institutional · Saudi Arabia</div>
+      <div class="partner-name">Misk Foundation<br/>Leadership Programmes</div>
+      <div class="partner-desc">— Next-generation leadership cohort design and shared expert faculty across two programmes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK / CASE STUDIES ============ -->
+<section class="block" id="work">
+  <div class="block-hero">
+    <div class="block-hero-left">
+      <div class="block-number">٠٥ · Selected Work</div>
+      <h2 class="block-title">A handful of <em>engagements</em>, told plainly.</h2>
+    </div>
+    <div class="block-hero-right">
+      Most of our work is not public. The cases below are <em>shared with permission</em> from the institutions involved — and shortened to protect what remains confidential.
+    </div>
+  </div>
+
+  <div class="case-list">
+
+    <a href="#" class="case-row">
+      <div class="case-num">٠١</div>
+      <div class="case-body">
+        <div class="case-tag">— Government & Public Service · Abu Dhabi —</div>
+        <h3 class="case-title">The thing that <em>remains</em> when the consultants leave.</h3>
+        <p class="case-summary">An eighteen-month engagement with a sovereign-linked institution to build a leadership continuity layer that would outlast the current chairman. Twelve council sessions, nine external experts, thirty-eight institutional decisions surfaced.</p>
+      </div>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Duration</div>
+          <div class="case-meta-value">١٨ months</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">٢٠٢٥–٢٦</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="case-row">
+      <div class="case-num">٠٢</div>
+      <div class="case-body">
+        <div class="case-tag">— Family Enterprise · Riyadh —</div>
+        <h3 class="case-title">Twelve cousins, <em>one decision.</em></h3>
+        <p class="case-summary">Succession architecture for a fourth-generation Saudi family enterprise. Built the family council, designed the governance framework, and ran the next-generation programme that produced the eventual chairman.</p>
+      </div>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Duration</div>
+          <div class="case-meta-value">٢٤ months</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">٢٠٢٤–٢٦</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="case-row">
+      <div class="case-num">٠٣</div>
+      <div class="case-body">
+        <div class="case-tag">— Finance & Banking · Dubai —</div>
+        <h3 class="case-title">Building the room <em>before</em> building the bank.</h3>
+        <p class="case-summary">For a new sovereign-linked financial institution being stood up from zero — the leadership development architecture for the first fifty senior hires. Cohort design, executive faculty, and the first three convenings.</p>
+      </div>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Duration</div>
+          <div class="case-meta-value">١٢ months</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">٢٠٢٥</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="case-row">
+      <div class="case-num">٠٤</div>
+      <div class="case-body">
+        <div class="case-tag">— Energy & Transition · Doha —</div>
+        <h3 class="case-title">An <em>energy company</em> learning to be a <em>transition company.</em></h3>
+        <p class="case-summary">Leadership programme for the top forty executives of a national energy company navigating the transition from extraction to integrated energy. Eight modules across one year, with a permanent standing council convened quarterly thereafter.</p>
+      </div>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Duration</div>
+          <div class="case-meta-value">١٢ months</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">٢٠٢٤–٢٥</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="case-row">
+      <div class="case-num">٠٥</div>
+      <div class="case-body">
+        <div class="case-tag">— Healthcare · Sharjah —</div>
+        <h3 class="case-title">The clinicians who would become <em>institution-builders.</em></h3>
+        <p class="case-summary">A two-year programme converting senior clinicians at a major hospital group into the next generation of administrative leadership. Co-designed with the chief medical officer; integrated with the hospital's existing CME pathway.</p>
+      </div>
+      <div class="case-meta">
+        <div class="case-meta-item">
+          <div class="case-meta-label">Duration</div>
+          <div class="case-meta-value">٢٤ months</div>
+        </div>
+        <div class="case-meta-item">
+          <div class="case-meta-label">Year</div>
+          <div class="case-meta-value">٢٠٢٤–٢٦</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section" id="engage">
+  <div class="cta-eyebrow">— begin a conversation —</div>
+  <h2 class="cta-title">If you're building something <em>meant to last</em>, we should talk.</h2>
+  <p class="cta-sub">
+    Athra works with a small number of institutions each year. Engagements typically begin with a single conversation — usually over a long lunch in Dubai or Riyadh — and proceed from there only when the fit is genuine.
+  </p>
+  <a href="mailto:hello@athra.com" class="cta-button">Write to us</a>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-mark">
+          <svg viewBox="0 0 64 64" fill="none">
+            <rect x="32" y="0" width="32" height="32" fill="#b8893a"/>
+            <rect x="0" y="32" width="32" height="32" fill="#f1e8d4"/>
+          </svg>
+          <div class="name">ATHRA</div>
+        </div>
+        <p class="footer-statement">
+          Executive capability for the institutions, family enterprises, and sovereign-linked organisations that intend to still matter in twenty years.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>The Platform</h4>
+        <ul>
+          <li><a href="#what-we-do">What We Do</a></li>
+          <li><a href="#sectors">Sectors</a></li>
+          <li><a href="#council">The Council</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="#work">Selected Work</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Programmes</h4>
+        <ul>
+          <li><a href="#">Custom Institutional</a></li>
+          <li><a href="#">Open Enrolment</a></li>
+          <li><a href="#">Certifications</a></li>
+          <li><a href="#">Executive Forums</a></li>
+          <li><a href="#">Advisory Engagements</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@athra.com">hello@athra.com</a></li>
+          <li><a href="#">DIFC · Dubai</a></li>
+          <li><a href="#">Riyadh · By appointment</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>© ATHRA · ٢٠٢٦ · Drafted in Dubai</div>
+      <div>All engagements held in confidence</div>
+    </div>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
